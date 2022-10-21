@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Review
-from .forms import ReviewForm
+from .forms import ReviewForm, CommentForm
 from django.contrib.auth import get_user_model
 
 
@@ -38,7 +38,8 @@ def community(request):
 def detail(request, pk):
   review = Review.objects.get(pk=pk)
   context = {
-    'review': review
+    'review': review,
+    'comment': review.comment_set.all(),
     }
   return render(request, 'reviews/detail.html', context)
 
@@ -68,7 +69,18 @@ def update(request, pk):
         from django.http import HttpResponseForbidden
         return HttpResponseForbidden()
 
-
+@login_required
 def delete(request, pk):
     Review.objects.get(pk=pk).delete()
     return redirect('reviews:community')
+
+@login_required
+def comment_create(request, pk):
+    review = Review.objects.get(pk=pk)
+    comment_form = CommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.review = review
+        comment.user = request.user
+        comment_form.save() # 모델 인스턴스의 save()
+    return redirect('reviews:detail', review.pk)

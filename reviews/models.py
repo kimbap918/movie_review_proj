@@ -12,3 +12,9 @@ class Review(models.Model):
     grade = models.DecimalField(max_digits=2, decimal_places=1) # 영화 평점
     created_at = models.DateTimeField(auto_now_add=True) # 리뷰 생성시간
     updated_at = models.DateTimeField(auto_now=True) # 리뷰 수정시간
+
+class Comment(models.Model):
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    content = models.TextField()
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, 
+                                on_delete=models.CASCADE, null=True)
