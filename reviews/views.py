@@ -67,3 +67,8 @@ def update(request, pk):
         # 403 에러메세지를 던진다
         from django.http import HttpResponseForbidden
         return HttpResponseForbidden()
+
+
+def delete(request, pk):
+    Review.objects.get(pk=pk).delete()
+    return redirect('reviews:community')

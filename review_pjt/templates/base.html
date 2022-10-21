@@ -55,24 +55,25 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'reviews:community' %}">Community</a>
           </li>
-          {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
+          {% if request.user.is_authenticated %} 
             <li class="nav-item">
               <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
             </li>
-            {% comment %} <li class="nav-item">
-              <a class="nav-link" style="color:white;" href="{% url 'movie:detail' user.pk %}">{{ request.user }}님, 환영합니다.</a>
-            </li> {% endcomment %}
-          {% comment %} {% else %} {% endcomment %}
+            <li class="nav-item">
+              <a class="nav-link" style="color:white;" href="#">{{ request.user }}님, 환영합니다.</a>
+              {% comment %} {% url 'movie:detail' user.pk %} {% endcomment %}
+            </li>
+          {% else %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'accounts:signup' %}">Join</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
-            {% comment %} </li>
+            </li>
             <li class="nav-item">
               <a class="nav-link" style="color:white;">로그인 해주세요</a>
-            </li> {% endcomment %}
-          {% comment %} {% endif %} {% endcomment %}
+            </li> 
+          {% endif %}
         </ul>
       </div>
     </nav>

@@ -28,7 +28,7 @@
     {% if request.user == review.user %}
       <div>
         <a class="btn btn-outline-primary my-3" href="{% url 'reviews:update' review.pk %}">수정하기</a>
-        <a class="btn btn-outline-danger my-3" href="#">삭제하기</a>
+        <a class="btn btn-outline-danger my-3" href="{% url 'reviews:delete' review.pk %}">삭제하기</a>
       </div>
     {% endif %}
   </form>
