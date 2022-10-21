@@ -2,6 +2,7 @@
 {% load django_bootstrap5 %}
 
 {% block body %}
+<div class="container mt-3">
   <h1>로그인</h1>
   <form action="" method="POST">
     {% csrf_token %}
@@ -9,4 +10,5 @@
     {% bootstrap_button button_type="submit" content="OK" %}
     {% comment %}  {% endcomment %}
   </form>
+</div>
 {% endblock body %}

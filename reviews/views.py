@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Review
+from .models import Review, Comment
 from .forms import ReviewForm, CommentForm
 from django.contrib.auth import get_user_model
 
@@ -84,3 +84,8 @@ def comment_create(request, pk):
         comment.user = request.user
         comment_form.save() # 모델 인스턴스의 save()
     return redirect('reviews:detail', review.pk)
+
+def comment_delete(request, review_pk, comment_pk):
+    comment = Comment.objects.get(pk=comment_pk)
+    comment.delete()
+    return redirect('reviews:detail', review_pk)
