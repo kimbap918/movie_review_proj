@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
+from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 
 
@@ -35,3 +37,8 @@ def login(request):
         'form': form
     }
     return render(request, 'accounts/login.html', context)
+
+def logout(request):
+    auth_logout(request)
+    messages.warning(request, '로그아웃 하였습니다.')
+    return redirect('reviews:index')

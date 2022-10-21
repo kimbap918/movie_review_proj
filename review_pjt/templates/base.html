@@ -57,7 +57,7 @@
           </li>
           {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
             <li class="nav-item">
-              <a class="nav-link" href="#">Logout</a>
+              <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
             </li>
             {% comment %} <li class="nav-item">
               <a class="nav-link" style="color:white;" href="{% url 'movie:detail' user.pk %}">{{ request.user }}님, 환영합니다.</a>

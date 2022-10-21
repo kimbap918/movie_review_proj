@@ -5,4 +5,6 @@ app_name = 'reviews'
 
 urlpatterns = [
   path('', views.index, name='index'),
+  path('create/', views.create, name='create'),
+  path('community/', views.community, name='community'),
 ]
