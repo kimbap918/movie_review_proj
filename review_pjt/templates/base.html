@@ -50,10 +50,10 @@
         <!-- .navbar-nav으로 full-height와 보다 가벼운 네비게이션(드롭다운을 위한 지원 포함)을 실현. -->
         <ul class="navbar-nav mb-2 mx-3 mb-lg-0 ms-lg-4 align-items-end">
           <li class="nav-item">
-            <a class="nav-link active" href="#">Home</a>
+            <a class="nav-link active" href="{% url 'reviews:index' %}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Community</a>
+            <a class="nav-link" href="{% url 'reviews:community' %}">Community</a>
           </li>
           {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
             <li class="nav-item">

@@ -3,6 +3,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Review
 from .forms import ReviewForm
+from django.contrib.auth import get_user_model
+
 
 # Create your views here.
 def index(request):
@@ -17,7 +19,7 @@ def create(request):
             review.user = request.user
             review.save()
             messages.success(request, '글 작성이 완료되었습니다.')
-            return redirect('reviews:index')
+            return redirect('reviews:community')
     else: 
         review_form = ReviewForm()
     context = {
@@ -31,3 +33,11 @@ def community(request):
         'reviews': reviews
     }
     return render(request, 'reviews/community.html', context)
+
+
+def detail(request, pk):
+  review = Review.objects.get(pk=pk)
+  context = {
+    'review': review
+    }
+  return render(request, 'reviews/detail.html', context)
